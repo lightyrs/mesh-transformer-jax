@@ -231,9 +231,7 @@ def arrays_to_sequences(token_list_iterable, sequence_length=2049):
 
 def chunk_and_finalize(arrays, args, encoder):
     sequences = list(arrays_to_sequences(arrays))
-
     full_seqs, trailing_data = sequences[:-1], sequences[-1]
-
     if args.min_unique_tokens > 0:
         full_seqs = list(enforce_min_unique(full_seqs, args.min_unique_tokens, encoder, args.verbose))
 
@@ -282,9 +280,7 @@ def create_tfrecords(files, args):
 
 if __name__ == "__main__":
     args = parse_args()
-
     if args.output_dir:
         os.makedirs(args.output_dir, exist_ok=True)
     files = get_files(args.input_dir)
-
     results = create_tfrecords(files, args)
